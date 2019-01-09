@@ -55,16 +55,17 @@ exports.view = (req, res) => {
 };
 
 
-
+//TODO fix update function
 exports.update = (req, res) => {
     Product.find({pid: req.params.pid}, (err, product) => {
         if (err)
             res.send(err);
-        product.name = req.body.name;
+        product.name = req.body.name ;
         product.pid = req.body.pid;
         product.category = req.body.category;
         product.price = req.body.price;
         product.color = req.body.color;
+        console.log(product);
 
         product.save((err)=>{
             if(err)
