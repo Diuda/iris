@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+let mongoose = require('mongoose');
 
 let api = require('./routes/api');
 
@@ -15,6 +16,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+mongoose.connect("mongodb://localhost/rest");
+
+var db = mongoose.connect;
 
 
 app.use('/api', api);
