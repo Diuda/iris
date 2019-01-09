@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
+// var jade = require('jade')
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -9,6 +10,8 @@ let mongoose = require('mongoose');
 let api = require('./routes/api');
 
 var app = express();
+
+// app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -39,7 +42,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log(err);
+  res.json({error: res.locals.message})
+  // res.render('error');
 });
 
 module.exports = app;
