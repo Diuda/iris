@@ -22,7 +22,7 @@ exports.index = (req, res) => {
 exports.new = (req, res) => {
     var product = new Product();
     product.name = req.body.name ? req.body.name : product.name;
-    product.id = req.body.id;
+    product.pid = req.body.pid;
     product.category = req.body.category;
     product.price = req.body.price;
     product.color = req.body.color;
@@ -43,8 +43,8 @@ exports.new = (req, res) => {
 
 
 exports.view = (req, res) => {
-    Product.findById(req.params.product_id, (err, product){
-        if(err)
+    Product.findById(req.params.product_id, (err, product) => {
+        if (err)
             res.send(err);
         res.json({
             message: 'Products loading...',
@@ -53,3 +53,38 @@ exports.view = (req, res) => {
     });
 };
 
+
+
+exports.update = (req, res) => {
+    Product.findById(req.params.product_id, (err, product) => {
+        if (err)
+            res.send(err);
+        product.name = req.body.name;
+        product.pid = req.body.pid;
+        product.category = req.body.category;
+        product.price = req.body.price;
+        product.color = req.body.color;
+
+        product.save((err)=>{
+            if(err)
+                res.json(err);
+            res.json({
+                message: 'Product Info Updated',
+                data: product
+            });
+        });
+    });
+};
+
+
+exports.delete = (req, res)=>{
+    Product.remove({ pid: req.params.pid }, (err, product)=>{
+        if(err)
+            res.send(err);
+
+        res.json({
+            status: "success",
+            message: "Product deleted"
+        });
+    });
+};
