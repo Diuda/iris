@@ -43,7 +43,8 @@ exports.new = (req, res) => {
 
 
 exports.view = (req, res) => {
-    Product.findById(req.params.pid, (err, product) => {
+    Product.find({pid: req.params.pid}, (err, product) => {
+        console.log
         if (err)
             res.send(err);
         res.json({
@@ -56,7 +57,7 @@ exports.view = (req, res) => {
 
 
 exports.update = (req, res) => {
-    Product.findById(req.params.pid, (err, product) => {
+    Product.find({pid: req.params.pid}, (err, product) => {
         if (err)
             res.send(err);
         product.name = req.body.name;
