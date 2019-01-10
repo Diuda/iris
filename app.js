@@ -6,10 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 let mongoose = require('mongoose');
+let cors = require('cors');
 
 let api = require('./routes/api');
 
 var app = express();
+
+app.use(cors());
 
 // app.set('view engine', 'jade');
 
